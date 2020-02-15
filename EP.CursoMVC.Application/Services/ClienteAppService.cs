@@ -11,6 +11,7 @@ using AutoMapper;
 using EP.CursoMVC.Domain;
 using EP.CursoMVC.Domain.Models;
 using EP.CursoMVC.Domain.Services;
+using DomainValidation.Validation;
 
 namespace EP.CursoMVC.Application.Services
 {
@@ -24,7 +25,7 @@ namespace EP.CursoMVC.Application.Services
          * não precisa saber como se instancia
         */
         public ClienteAppService(IClienteRepository clienteRepository,
-                                IClienteService clienteService)
+                                IClienteService clienteService,IUnitOfWork uow):base(uow)
         {
             _clienteRepository = clienteRepository;
             _clienteService = clienteService;
@@ -65,6 +66,17 @@ namespace EP.CursoMVC.Application.Services
             //Repassando a responsabilidade para camada de domínio
             var clienteReturn =  _clienteService.Adicionar(cliente);
             
+            //add um registro secundário
+            if (clienteReturn.ValidationResult.IsValid)
+            {
+                if (!Commit())
+                {
+                    AdicionarErrosValidacao(cliente.ValidationResult,"Ocorreu um erro no momento" +
+                        " de salvar");
+                }
+            } 
+            
+
             if (!clienteReturn.ValidationResult.IsValid)
             {
                 //Devolver validações para a camada de apresentação

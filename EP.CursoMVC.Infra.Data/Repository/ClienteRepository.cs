@@ -7,11 +7,13 @@ using Dapper;
 using System.Text;
 using System.Threading.Tasks;
 using EP.CursoMVC.Domain.Models;
+using EP.CursoMVC.Infra.Data.Context;
 
 namespace EP.CursoMVC.Infra.Data.Repository
 {
     public class ClienteRepository : Repository<Cliente>, IClienteRepository
     {
+        public ClienteRepository(CursoMVCContext context) : base(context) { }
         
         public IEnumerable<Cliente> ObterAtivos()
         {

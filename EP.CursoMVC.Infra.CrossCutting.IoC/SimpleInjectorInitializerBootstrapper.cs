@@ -3,7 +3,9 @@ using EP.CursoMVC.Application.Interfaces;
 using EP.CursoMVC.Application.Services;
 using EP.CursoMVC.Domain.Interfaces;
 using EP.CursoMVC.Domain.Services;
+using EP.CursoMVC.Infra.Data.Context;
 using EP.CursoMVC.Infra.Data.Repository;
+using EP.CursoMVC.Infra.Data.UnifOfWork;
 using SimpleInjector;
 
 namespace EP.CursoMVC.Infra.CrossCutting.IoC
@@ -34,6 +36,8 @@ namespace EP.CursoMVC.Infra.CrossCutting.IoC
 
             //Infra
             container.Register<IClienteRepository,ClienteRepository>(Lifestyle.Scoped);
+            container.Register<IUnitOfWork,UnitOfWork>(Lifestyle.Scoped);
+            container.Register<CursoMVCContext>(Lifestyle.Scoped);
 
             //======================================================
         }

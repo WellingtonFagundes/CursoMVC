@@ -1,4 +1,5 @@
 ﻿using EP.CursoMVC.Domain.Interfaces;
+using EP.CursoMVC.Domain.Validations.Clientes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,9 @@ namespace EP.CursoMVC.Domain.Services
         {
             if (!cliente.EhValido()) return cliente;
 
-            _clienteRepository.Adicionar(cliente);
+            cliente.ValidationResult = new ClienteEstaAptoParaCadastroValidation(_clienteRepository).Validate(cliente);
+
+            if (!cliente.ValidationResult.IsValid) _clienteRepository.Adicionar(cliente);
 
             return cliente;
         }

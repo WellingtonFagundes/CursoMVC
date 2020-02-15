@@ -17,9 +17,9 @@ namespace EP.CursoMVC.Infra.Data.Repository
         protected CursoMVCContext Db;
         protected DbSet<TEntity> DbSet;
 
-        public Repository()
+        public Repository(CursoMVCContext context)
         {
-            Db = new CursoMVCContext();
+            Db = context;
             DbSet = Db.Set<TEntity>();
         }   
         public virtual void Adicionar(TEntity obj)
