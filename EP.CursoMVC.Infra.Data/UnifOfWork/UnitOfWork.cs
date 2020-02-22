@@ -11,12 +11,28 @@ namespace EP.CursoMVC.Infra.Data.UnifOfWork
     public class UnitOfWork : IUnitOfWork
     {
         private readonly CursoMVCContext _context;
-
+        
         public UnitOfWork(CursoMVCContext context)
         {
             _context = context;
         }
-        public bool Commit()
+
+        public void BeginTransaction()
+        {
+            _context.Database.BeginTransaction();
+        }
+
+        public void Rollback()
+        {
+            _context.Database.CurrentTransaction.Rollback();
+        }
+
+        public void Commit()
+        {
+            _context.Database.CurrentTransaction.Commit();
+        }
+
+        public bool SaveChanges()
         {
             return _context.SaveChanges() > 0;
         }

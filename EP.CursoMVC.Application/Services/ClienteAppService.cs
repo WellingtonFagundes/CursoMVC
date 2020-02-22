@@ -65,13 +65,27 @@ namespace EP.CursoMVC.Application.Services
 
             //Repassando a responsabilidade para camada de domínio
             var clienteReturn =  _clienteService.Adicionar(cliente);
-            
+
+            //BeginTransaction();
+
+            ////blabla
+
+            //try
+            //{
+            //    Commit();
+            //}
+            //catch (Exception)
+            //{
+            //    Rollback();
+            //}
+
             //add um registro secundário
             if (clienteReturn.ValidationResult.IsValid)
             {
-                if (!Commit())
+                
+                if (!SaveChanges())
                 {
-                    AdicionarErrosValidacao(cliente.ValidationResult,"Ocorreu um erro no momento" +
+                    AdicionarErrosValidacao(cliente.ValidationResult, "Ocorreu um erro no momento" +
                         " de salvar");
                 }
             } 

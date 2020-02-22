@@ -8,6 +8,9 @@ namespace EP.CursoMVC.Domain.Interfaces
 {
     public interface IUnitOfWork
     {
-        bool Commit();
+        void Commit();
+        void BeginTransaction();
+        void Rollback();
+        bool SaveChanges();
     }
 }

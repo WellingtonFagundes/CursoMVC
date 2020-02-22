@@ -21,9 +21,25 @@ namespace EP.CursoMVC.Application.Services
         {
             validationResult.Add(new ValidationError(erro));
         }
-        protected bool Commit()
+
+        public void BeginTransaction()
         {
-            return _uow.Commit();
+            _uow.BeginTransaction();
+        }
+
+        public void Rollback()
+        {
+            _uow.Rollback();
+        }
+
+        protected void Commit()
+        {
+            _uow.Commit();
+        }
+
+        protected bool SaveChanges()
+        {
+            return _uow.SaveChanges();
         }
     }
 }

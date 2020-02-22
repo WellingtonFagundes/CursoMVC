@@ -1,4 +1,5 @@
-﻿using EP.CursoMVC.Domain;
+﻿using DomainValidation.Validation;
+using EP.CursoMVC.Domain;
 using EP.CursoMVC.Domain.Models;
 using EP.CursoMVC.Infra.Data.Mappings;
 using System;
@@ -43,6 +44,7 @@ namespace EP.CursoMVC.Infra.Data.Context
 
             modelBuilder.Configurations.Add(new ClienteMapping());
             modelBuilder.Configurations.Add(new EnderecoMapping());
+            modelBuilder.Ignore<ValidationResult>();
 
             //modelBuilder.HasDefaultSchema("Sistema1");
 

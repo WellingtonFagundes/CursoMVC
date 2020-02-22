@@ -26,7 +26,7 @@ namespace EP.CursoMVC.Domain.Services
 
             cliente.ValidationResult = new ClienteEstaAptoParaCadastroValidation(_clienteRepository).Validate(cliente);
 
-            if (!cliente.ValidationResult.IsValid) _clienteRepository.Adicionar(cliente);
+            if (cliente.ValidationResult.IsValid) _clienteRepository.Adicionar(cliente);
 
             return cliente;
         }
