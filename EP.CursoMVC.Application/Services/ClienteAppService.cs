@@ -102,14 +102,24 @@ namespace EP.CursoMVC.Application.Services
             return clienteEnderecoViewModel;
         }
 
-        public ClienteViewModel Atualizar(ClienteViewModel clienteViewModel)
+        public ClienteViewModel Atualizar(Guid id,ClienteViewModel clienteViewModel)
         {
             var cliente = Mapper.Map<Cliente>(clienteViewModel);
 
             if (!cliente.EhValido()) return clienteViewModel;
 
             //Repassando a responsabilidade para camada de domínio
-            _clienteService.Atualizar(cliente);
+            var clienteReturn = _clienteService.Atualizar(cliente);
+
+            if (clienteReturn.ValidationResult.IsValid)
+            {
+
+                if (!SaveChanges())
+                {
+                    AdicionarErrosValidacao(cliente.ValidationResult, "Ocorreu um erro no momento" +
+                        " de salvar");
+                }
+            }
 
             return clienteViewModel;
         }

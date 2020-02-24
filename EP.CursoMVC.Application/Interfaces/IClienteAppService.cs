@@ -15,7 +15,7 @@ namespace EP.CursoMVC.Application.Interfaces
         IEnumerable<ClienteViewModel> ObterAtivos();
         ClienteViewModel ObterPorCPF(string cpf);
         ClienteViewModel ObterPorEmail(string email);
-        ClienteViewModel Atualizar(ClienteViewModel clienteViewModel);
+        ClienteViewModel Atualizar(Guid id,ClienteViewModel clienteViewModel);
         void Remover(Guid id);
     }
 }

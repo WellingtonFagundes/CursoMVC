@@ -122,7 +122,7 @@ namespace EP.CursoMVC.UI.Site.Controllers
         {
             if (!ModelState.IsValid) return View(clienteEndereco);
 
-            _clienteAppService.Atualizar(clienteEndereco);
+            _clienteAppService.Atualizar(clienteEndereco.Id,clienteEndereco);
 
             return RedirectToAction("Index");
         }

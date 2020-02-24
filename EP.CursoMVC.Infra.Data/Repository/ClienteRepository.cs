@@ -42,7 +42,8 @@ namespace EP.CursoMVC.Infra.Data.Repository
 
             const string sql = @"SELECT * FROM Clientes c " +
                       "LEFT JOIN Enderecos e " +
-                      "ON c.Id = @uid AND c.Excluido = 0 AND c.Ativo = 1";
+                      "ON c.Id = e.ClienteId " +
+                      "WHERE c.Id = @uid AND c.Excluido = 0 AND c.Ativo = 1";
 
             //Preciso olhar as tabelas Clientes e Endereços o terceiro parâmetro indica
             //qual objeto quero retornar que é Clientes
