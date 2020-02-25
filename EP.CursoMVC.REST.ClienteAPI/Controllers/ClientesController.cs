@@ -6,9 +6,13 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace EP.CursoMVC.REST.ClienteAPI.Controllers
 {
+    [MyCorsPolicy]
+    //headers - dentro do domínio pode fazer tudo
+    //methods - fora do domínio só pode por exemplo GET e POST
     public class ClientesController : ApiController
     {
         private readonly IClienteAppService _clienteAppService;

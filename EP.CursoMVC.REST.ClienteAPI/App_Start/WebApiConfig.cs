@@ -14,6 +14,9 @@ namespace EP.CursoMVC.REST.ClienteAPI
             // Web API routes
             config.MapHttpAttributeRoutes();
 
+            //Aplicação pode ser acessada de qualquer origem
+            config.EnableCors();
+
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",
